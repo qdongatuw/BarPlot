@@ -1,0 +1,75 @@
+import os
+import matplotlib.pyplot as plt
+import matplotlib
+import tkinter as tk
+from tkinter import ttk
+import numpy as np
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from mod_ax import CusAxes
+
+
+class FigureWindow(tk.Toplevel):
+    def __init__(self, group: list, datas: list, option: dict, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.CusAx = None
+        self.groups = group
+        self.datas = datas
+        self.option = option
+        self.is_cap = self.option['capsize']
+        self.is_legend = tk.IntVar()
+        self.is_legend.set(0)
+        self.is_raw = tk.IntVar()
+        self.is_raw.set(0)
+        self.open_closed = tk.IntVar()
+        self.open_closed.set(1)
+        f = ttk.Frame(self)
+        f.pack(side=tk.TOP, fill=tk.X, expand=1)
+
+        tk.Button(f, text='Save', command=self.save).grid(row=0, column=0)
+        ttk.Checkbutton(f, text='Show legend', variable=self.is_legend, command=self.plot).grid(row=0, column=1)
+        ttk.Checkbutton(f, text='Raw data', variable=self.is_raw, command=self.plot).grid(row=0, column=2)
+
+        ttk.Radiobutton(f, text='Open', variable=self.open_closed, value=0, command=self.plot).grid(row=0, column=3)
+        ttk.Radiobutton(f, text='Closed', variable=self.open_closed, value=1, command=self.plot).grid(row=0, column=4)
+
+        self.re_text = tk.Text(self, height=5)
+        self.re_text.pack(side=tk.TOP, fill=tk.X, expand=1)
+
+        self.fig = plt.figure()
+        self.ax = self.fig.add_subplot(111)
+
+        self.canvas = FigureCanvasTkAgg(figure=self.fig, master=self)
+        self.canvas.get_tk_widget().pack(expand=1)
+        self.plot()
+        self.protocol("WM_DELETE_WINDOW", self.destroy)
+
+    def save(self):
+        path = self.option['path'] + self.option['sheet'] + 'box_plot' + '.' + self.option['save_format']
+        path_txt = self.option['path'] + self.option['sheet'] + 'note.txt'
+        with open(path_txt, 'w') as f:
+            f.write(self.re_text.get(index1='0.0', index2=tk.END))
+        self.fig.savefig(fname=path)
+        os.startfile(path)
+        # os.startfile(path_txt)
+
+    def plot(self):
+        self.ax.clear()
+
+        bx = self.ax.boxplot(self.datas, showcaps=self.is_cap, showfliers=False, widths=self.option['bar_width'])
+
+        for index, data in enumerate(self.datas):
+            pass
+
+
+        # self.ax.set_ylim(0, 1.1)
+        self.ax.set_ylabel(self.option['sheet'])
+        # self.ax.set_ylabel('Y data')
+
+        self.ax.set_xticks(np.arange(1, len(self.groups)+1))
+        self.ax.set_xticklabels(self.groups)
+        # self.ax.set_xlim(-0.75, len(self.groups)-0.25)
+        if self.is_legend.get():
+            matplotlib.legend.DraggableLegend(self.ax.legend())
+        if self.CusAx is None:
+            self.CusAx = CusAxes(self.ax)
+        self.canvas.draw()
