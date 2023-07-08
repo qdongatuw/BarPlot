@@ -288,6 +288,5 @@ class GUI(tk.Tk):
 
 if __name__ == '__main__':
     # plt.rcParams['axes.linewidth'] = 5
-    print('Zhu shi yong yu kuai, mei you Bug! :-)')
     APP = GUI()
     APP.mainloop()
