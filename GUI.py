@@ -171,6 +171,18 @@ class GUI(tk.Tk):
         datas = self.data.data_list
         self.option['sheet'] = sheet
         FigureWindow(group=groups, datas=datas, option=self.option)
+    
+    def unpaired_plot(self):
+        sheet = self.sheet_name.get()
+        self.data.get_groups(sheet_name=sheet)
+        groups = self.data.group_name
+        if len(groups) > 6:
+            messagebox.showerror(title='Error!', message="Too many groups.")
+            return
+        self.data.load_data(sheet_name=sheet)
+        datas = self.data.data_list
+        self.option['sheet'] = sheet
+        FigureWindow(group=groups, datas=datas, plot_type='', option=self.option)
 
     def const_cells(self, master):
         row = len(self.cells)
