@@ -76,7 +76,7 @@ class SetDialog(tk.Toplevel):
         self.x_tick_size_tk = tk.StringVar()
         self.x_tick_size_tk.set('12')
         self.x_tick_rotation_tk = tk.StringVar()
-        self.x_tick_rotation_tk.set('0')
+        self.x_tick_rotation_tk.set('30')
         self.y_label_tk = tk.StringVar()
         self.y_label_tk.set(self.axes.get_ylabel())
         self.y_tick_size_tk = tk.StringVar()
