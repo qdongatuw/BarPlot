@@ -59,7 +59,7 @@ class FigureWindow(tk.Toplevel):
         with open(path_txt, 'w') as f:
             f.write(self.re_text.get(index1='0.0', index2=tk.END))
         self.fig.savefig(fname=path)
-        os.startfile(path)
+        # os.startfile(path)
         # os.startfile(path_txt)
 
     def plot(self):
