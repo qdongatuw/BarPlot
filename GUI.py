@@ -5,6 +5,8 @@ import itertools
 from matplotlib import rc
 from configparser import ConfigParser
 from load_data import LoadData
+from unpaired import FigureWindow
+
 
 
 class GUI(tk.Tk):
