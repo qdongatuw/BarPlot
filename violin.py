@@ -79,7 +79,7 @@ class FigureWindow(tk.Toplevel):
                 self.ax.plot(x, data, '.', color=self.option['colors'][index])
 
         # self.ax.set_ylim(0, 1.1)
-        self.ax.set_ylabel('${'+self.option['sheet']+'}$')
+        self.ax.set_ylabel('${' + self.option['sheet'] + '}$')
         # self.ax.set_ylabel('Y data')
 
         self.ax.set_xticks(np.arange(1, len(self.groups)+1))
