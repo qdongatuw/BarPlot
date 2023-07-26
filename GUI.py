@@ -1,14 +1,16 @@
 import tkinter as tk
-from tkinter import ttk, messagebox, filedialog
+from tkinter import messagebox, filedialog
 import os
 import itertools
+import ttkbootstrap as ttk
+import ttkbootstrap.constants as tc
 from matplotlib import rc
 from configparser import ConfigParser
 from load_data import LoadData
 from unpaired import FigureWindow
 
 
-class GUI(tk.Tk):
+class GUI(ttk.Window):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.title('Bar Plot (v 0.1)')
