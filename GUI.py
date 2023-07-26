@@ -26,7 +26,7 @@ class GUI(ttk.Window):
         self.data = None
 
         f_file = ttk.Labelframe(f, text='Excel File')
-        f_file.pack(side=tk.TOP, fill=tk.X, expand=1)
+        f_file.pack(side=tk.TOP, fill=tk.X, expand=1, padx=5, pady=5, ipadx=5, ipady=5)
 
         f_bottom = ttk.Frame(f)
         f_bottom.pack(side=tk.BOTTOM, fill=tk.X, expand=1)
@@ -57,8 +57,8 @@ class GUI(ttk.Window):
         self.f_sheet_ = ttk.Frame(self.f_sheet)
         self.f_sheet_.pack(fill=tk.BOTH, expand=1)
 
-        ttk.Entry(f_file, textvariable=self.file_tk).pack(side=tk.LEFT, fill=tk.X, expand=1)
-        ttk.Button(f_file, text='Browse', command=self.open_file).pack(side=tk.LEFT)
+        ttk.Entry(f_file, textvariable=self.file_tk).pack(side=tk.LEFT, fill=tk.X, expand=1, padx=5, pady=5)
+        ttk.Button(f_file, text='Browse', command=self.open_file).pack(side=tk.LEFT, padx=5, pady=5)
 
         self.protocol("WM_DELETE_WINDOW", self.quit)
 
