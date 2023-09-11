@@ -76,7 +76,7 @@ class FigureWindow(tk.Toplevel):
                 p['bodies'][index].set_edgecolor(self.option['colors'][index])
             if self.is_raw.get():
                 x = (np.random.rand(len(data)) - 0.5) * self.option['bar_width'] * 0.8 + index+1
-                self.ax.plot(x, data, '.', color=self.option['colors'][index])
+                self.ax.plot(x, data, '.', markersize=0.5, color=self.option['colors'][index])
 
         # self.ax.set_ylim(0, 1.1)
         self.ax.set_ylabel('${' + self.option['sheet'] + '}$')
